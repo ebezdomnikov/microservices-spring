@@ -1,0 +1,38 @@
+version: '2'
+services:
+  registry-service:
+    image: ac/registry-service
+    container_name: "registry-service"
+    environment:
+      - CONFIG_SERVER_URL=http://configuration-service:8888
+      - CONFIG_EUREKA_URL=http://registry-service:8761
+    ports:
+      - "8761:8761"
+  routing-service:
+    image: ac/routing-service
+    container_name: "routing-service"
+    environment:
+      - CONFIG_SERVER_URL=http://configuration-service:8888
+      - CONFIG_EUREKA_URL=http://registry-service:8761
+    ports:
+      - "8082:8082"
+  product-service:
+    image: ac/product-service
+    container_name: "product-service"
+    environment:
+      - CONFIG_SERVER_URL=http://configuration-service:8888
+      - CONFIG_POSTGRESQL_URL=jdbc:postgresql://postgresql-service/postgres
+      - CONFIG_EUREKA_URL=http://registry-service:8761
+      - CONFIG_RABBITMQ_ADDRESSES=rabbitmq-service:5672
+    ports:
+      - "8090:8090"
+  dispatcher-service:
+    image: ac/dispatcher-service
+    container_name: "dispatcher-service"
+    environment:
+      - CONFIG_SERVER_URL=http://configuration-service:8888
+      - CONFIG_POSTGRESQL_URL=jdbc:postgresql://postgresql-service/postgres
+      - CONFIG_EUREKA_URL=http://registry-service:8761
+      - CONFIG_RABBITMQ_ADDRESSES=rabbitmq-service:5672
+    ports:
+      - "8100:8100"

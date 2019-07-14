@@ -47,7 +47,8 @@ public class RabbitMqConfiguration {
     @Bean
     RabbitTemplate rabbitTemplate() {
         RabbitTemplate rabbitTemplate = new RabbitTemplate(connectionFactory());
-        Jackson2JsonMessageConverter converter = new Jackson2JsonMessageConverter(objectMapper);
+        Jackson2JsonMessageConverter converter = new Jackson2JsonMessageConverter();
+        converter.setJsonObjectMapper(objectMapper);
         rabbitTemplate.setMessageConverter(converter);
         rabbitTemplate.setExchange(exchangeName);
         return rabbitTemplate;

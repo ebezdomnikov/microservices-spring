@@ -1,5 +1,6 @@
 package com.ac.microservices.product.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -9,7 +10,9 @@ import javax.persistence.*;
 @Setter
 @ToString
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
+@Builder
 @Table(name = "products")
 public class Product {
 
@@ -19,9 +22,22 @@ public class Product {
     @Column(name = "name")
     private String name;
 
-    @Builder
-    public Product(String id, String name) {
-        this.id = id;
-        this.name = name;
-    }
+    @Column(name = "product_type")
+    @JsonProperty("product_type")
+    private String productType;
+
+    @Column(name = "model_number")
+    private String modelNumber;
+
+    @Embedded
+    @JsonProperty("meta_data")
+    private ProductMeta meta;
+
+    @Embedded
+    @JsonProperty("pricing_information")
+    private ProductPriceInformation priceInformation;
+
+    @Embedded
+    @JsonProperty("product_description")
+    private ProductDescription productDescription;
 }

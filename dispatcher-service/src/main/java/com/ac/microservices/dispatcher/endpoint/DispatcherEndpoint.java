@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
+
 @RestController
 public class DispatcherEndpoint {
 
@@ -16,7 +18,7 @@ public class DispatcherEndpoint {
     private EventService eventService;
 
     @PostMapping("createProduct")
-    public ResponseEntity createProduct(@RequestBody CreateProductEvent event) {
+    public ResponseEntity createProduct(@Valid @RequestBody CreateProductEvent event) {
         eventService.createProductEvent(event);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }

@@ -23,5 +23,4 @@ public class Event {
     @GenericGenerator(name = "system-uuid", strategy = "uuid")
     @JsonIgnore
     private String id;
-
 }

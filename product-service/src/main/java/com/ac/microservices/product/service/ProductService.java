@@ -19,7 +19,7 @@ public class ProductService {
 
     public Product findOne(String id) {
         log.info("findOne; {}", id);
-        return repository.findById(id).get();
+        return repository.findOne(id);
     }
 
     public Iterable<Product> findAll() {

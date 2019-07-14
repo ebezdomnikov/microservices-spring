@@ -1,5 +1,8 @@
 package com.ac.microservices.product.service;
 
+import com.ac.microservices.product.model.ProductDescription;
+import com.ac.microservices.product.model.ProductMeta;
+import com.ac.microservices.product.model.ProductPriceInformation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.Message;
 import org.springframework.stereotype.Component;
@@ -16,7 +19,7 @@ import java.io.IOException;
 public class QueueListener {
 
     @Autowired
-    private ProductService customerService;
+    private ProductService productService;
 
     @Autowired
     private ObjectMapper objectMapper;
@@ -24,9 +27,9 @@ public class QueueListener {
     @RabbitListener(queues = "product-command-queue")
     public void productWorker(Message message) {
         try {
-            log.info("customerWorker; accepted message: {}", message);
-            Product saved = customerService.save(toProduct(message));
-            log.debug("customerWorker; saved value: {}", saved);
+            log.info("productWorker; accepted message: {}", message);
+            Product saved = productService.save(toProduct(message));
+            log.debug("productWorker; saved value: {}", saved);
         } catch (Exception e) {
             log.error("{}", e);
         }
@@ -35,7 +38,31 @@ public class QueueListener {
     private Product toProduct(Message message) throws IOException {
         CreateProductEvent productEvent = objectMapper.readValue(message.getBody(), CreateProductEvent.class);
         return Product.builder()
+                .id(productEvent.getProductId())
                 .name(productEvent.getName())
+                .modelNumber(productEvent.getModelNumber())
+                .productType(productEvent.getProductType())
+                .priceInformation(ProductPriceInformation
+                        .builder()
+                        .standardPrice(productEvent.getPricingInformation().getStandardPrice())
+                        .standardPriceNoVat(productEvent.getPricingInformation().getStandardPriceNoVat())
+                        .currentPrice(productEvent.getPricingInformation().getCurrentPrice())
+                        .build()
+                )
+                .meta(ProductMeta.builder()
+                        .canonical(productEvent.getMeta().getCanonical())
+                        .description(productEvent.getMeta().getDescription())
+                        .keywords(productEvent.getMeta().getKeywords())
+                        .pageTitle(productEvent.getMeta().getPageTitle())
+                        .siteName(productEvent.getMeta().getSiteName())
+                        .build()
+                )
+                .productDescription(ProductDescription.builder()
+                        .title(productEvent.getProductDescription().getTitle())
+                        .subtitle(productEvent.getProductDescription().getSubtitle())
+                        .text(productEvent.getProductDescription().getText())
+                        .build()
+                )
                 .build();
     }
 }

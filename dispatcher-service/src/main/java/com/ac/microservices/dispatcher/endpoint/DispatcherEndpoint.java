@@ -25,7 +25,7 @@ public class DispatcherEndpoint {
     }
 
     @PostMapping("updateProduct")
-    public ResponseEntity createProduct(@Validated(Event.ValidationUpdate.class) @RequestBody UpdateProductEvent event) {
+    public ResponseEntity updateProduct(@Validated(Event.ValidationUpdate.class) @RequestBody UpdateProductEvent event) {
         eventService.updateProductEvent(event);
         return ResponseEntity.status(HttpStatus.OK).build();
     }

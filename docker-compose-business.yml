@@ -1,7 +1,7 @@
 version: '2'
 services:
   registry-service:
-    image: ac/registry-service
+    image: ac-prefix/registry-service
     container_name: "registry-service"
     environment:
       - CONFIG_SERVER_URL=http://configuration-service:8888
@@ -9,7 +9,7 @@ services:
     ports:
       - "8761:8761"
   routing-service:
-    image: ac/routing-service
+    image: ac-prefix/routing-service
     container_name: "routing-service"
     environment:
       - CONFIG_SERVER_URL=http://configuration-service:8888
@@ -17,7 +17,7 @@ services:
     ports:
       - "8082:8082"
   product-service:
-    image: ac/product-service
+    image: ac-prefix/product-service
     container_name: "product-service"
     environment:
       - CONFIG_SERVER_URL=http://configuration-service:8888
@@ -27,7 +27,7 @@ services:
     ports:
       - "8090:8090"
   dispatcher-service:
-    image: ac/dispatcher-service
+    image: ac-prefix/dispatcher-service
     container_name: "dispatcher-service"
     environment:
       - CONFIG_SERVER_URL=http://configuration-service:8888

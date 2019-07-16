@@ -1,11 +1,9 @@
 package com.ac.microservices.product.service;
 
-import com.ac.microservices.model.ProductPricingInformation;
 import com.ac.microservices.model.UpdateProductEvent;
 import com.ac.microservices.product.model.ProductDescription;
 import com.ac.microservices.product.model.ProductMeta;
 import com.ac.microservices.product.model.ProductPriceInformation;
-import com.sun.javaws.exceptions.InvalidArgumentException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.Message;
 import org.springframework.stereotype.Component;

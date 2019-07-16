@@ -8,11 +8,13 @@
     <version>0.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
     <modules>
-        <module>dispatcher-service-api</module>
-        <module>registry-service</module>
         <module>configuration-service</module>
-        <module>routing-service</module>
         <module>dispatcher-service</module>
+        <module>dispatcher-service-api</module>
+        <module>product-service</module>
+        <module>product-service-client</module>
+        <module>registry-service</module>
+        <module>routing-service</module>
     </modules>
 
     <parent>
@@ -22,7 +24,7 @@
     </parent>
 
     <properties>
-        <docker.image.prefix>ac</docker.image.prefix>
+        <docker.image.prefix>ac-prefix</docker.image.prefix>
     </properties>
 
     <dependencyManagement>

@@ -1,7 +1,7 @@
 version: '2'
 services:
   configuration-service:
-    image: ac/configuration-service
+    image: ac-prefix/configuration-service
     container_name: "configuration-service"
     ports:
       - "8888:8888"

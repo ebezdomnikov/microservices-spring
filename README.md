@@ -10,13 +10,13 @@ It contains modules:
 
 To run (all action should be executed from the root of repository):
 
-###1. Build all modules and docker images for them
+### 1. Build all modules and docker images for them
     mvn clean package docker:build
 
-###2. Run infrastructure containers (postgresql, rabbitmq, configuration-service) 
+### 2. Run infrastructure containers (postgresql, rabbitmq, configuration-service) 
     docker-compose -f docker-compose-infrastructure.yml up -d
 
-###3. Run business containers  
+### 3. Run business containers  
     docker-compose -f docker-compose-business.yml up -d
 
 # URLs

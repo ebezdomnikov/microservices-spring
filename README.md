@@ -1,4 +1,4 @@
-##Microservices project
+## Microservices project
 
 It contains modules: 
 * Configuration service - holds properties for all applications

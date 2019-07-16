@@ -34,7 +34,7 @@ Through routing service:
     
 ## Rabbit MQ
 
-[Link to UI](http://192.168.99.100:15672)
+[Link to UI](http://localhost:15672)
  
     login: guest
     password: guest

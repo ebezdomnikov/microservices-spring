@@ -3,8 +3,10 @@ package com.ac.microservices.product.model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.MetaValue;
 
 import javax.persistence.*;
+import javax.validation.Valid;
 
 @Getter
 @Setter
@@ -31,13 +33,16 @@ public class Product {
 
     @Embedded
     @JsonProperty("meta_data")
-    private ProductMeta meta;
+    @Valid
+    private ProductMeta meta = new ProductMeta();
 
     @Embedded
     @JsonProperty("pricing_information")
-    private ProductPriceInformation priceInformation;
+    @Valid
+    private ProductPriceInformation priceInformation = new ProductPriceInformation();
 
     @Embedded
     @JsonProperty("product_description")
-    private ProductDescription productDescription;
+    @Valid
+    private ProductDescription productDescription = new ProductDescription();
 }

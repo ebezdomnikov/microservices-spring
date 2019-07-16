@@ -23,6 +23,9 @@ public class RabbitMqConfiguration {
     @Value("${rabbitmq.queue.product.name}")
     private String queueProductName;
 
+    @Value("${rabbitmq.queue.product.update.name}")
+    private String queueProductUpdateName;
+
     @Value("${rabbitmq.exchange.name}")
     private String exchangeName;
 
@@ -51,13 +54,22 @@ public class RabbitMqConfiguration {
     }
 
     @Bean
+    Queue productUpdateQueue() {
+        return new Queue(queueProductUpdateName);
+    }
+
+    @Bean
     DirectExchange directExchange() {
         return new DirectExchange(exchangeName);
     }
 
     @Bean
-    Binding orderCommandBinding() {
+    Binding productCommandBinding() {
         return BindingBuilder.bind(productQueue()).to(directExchange()).with("product");
+    }
+    @Bean
+    Binding productUpdateCommandBinding() {
+        return BindingBuilder.bind(productUpdateQueue()).to(directExchange()).with("product-update");
     }
 
 }

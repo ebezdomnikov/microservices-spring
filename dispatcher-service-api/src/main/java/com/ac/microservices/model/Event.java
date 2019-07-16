@@ -23,4 +23,12 @@ public class Event {
     @GenericGenerator(name = "system-uuid", strategy = "uuid")
     @JsonIgnore
     private String id;
+
+    public interface ValidationCreate {
+        // validation group marker interface
+    }
+
+    public interface ValidationUpdate {
+        // validation group marker interface
+    }
 }

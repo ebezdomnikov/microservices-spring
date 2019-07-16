@@ -6,6 +6,8 @@ import lombok.Setter;
 import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.Embeddable;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 
 @Getter
@@ -13,14 +15,14 @@ import java.math.BigDecimal;
 @Embeddable
 public class ProductPricingInformation {
 
-    @NotBlank(message = "Standard price name is mandatory")
     @JsonProperty("standard_price")
+    @DecimalMin(value = "0", groups = {Event.ValidationCreate.class, UpdateProductEvent.ValidationUpdate.class})
     private BigDecimal standardPrice;
 
-    @NotBlank(message = "Standard price no vat is mandatory")
+    @DecimalMin(value = "0", groups = {Event.ValidationCreate.class, UpdateProductEvent.ValidationUpdate.class})
     @JsonProperty("standard_price_no_vat")
     private BigDecimal standardPriceNoVat;
 
-    @NotBlank(message = "Standard price is mandatory")
+    @DecimalMin(value = "0", groups = {Event.ValidationCreate.class, UpdateProductEvent.ValidationUpdate.class})
     private BigDecimal currentPrice;
 }

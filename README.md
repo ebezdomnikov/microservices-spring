@@ -26,7 +26,15 @@ Through routing service:
 
 [Dispatcher service swagger](http://localhost:8082/dispatcher-service/swagger-ui.html)
 
+[Create Product](http://localhost:8082/dispatcher-service/swagger-ui.html#!/dispatcher-endpoint/createProductUsingPOST)
+
+[Update Product](http://localhost:8082/dispatcher-service/swagger-ui.html#!/dispatcher-endpoint/updateProductUsingPOST)
+
 [Product service swagger](http://localhost:8082/product-service/swagger-ui.html)
+
+[List all products](http://localhost:8082/product-service/swagger-ui.html#!/product-endpoint/findAllUsingGET)
+
+[Find one product](http://localhost:8082/product-service/swagger-ui.html#!/product-endpoint/findOneUsingGET)
 
 ## Eureka
 
@@ -39,3 +47,4 @@ Through routing service:
     login: guest
     password: guest
  
+### Wait a little bit, the system need time to up:)
